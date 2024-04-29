@@ -77,4 +77,22 @@ public:
         return move->data;
     }
 
+    void add(int index , T& value ){
+        if (index < 0 || index > size){
+            throw std::out_of_range("Out of range");
+        }
+        if (index == 0){
+            addFirst(value);
+        }else{
+            auto move = body;
+            for (int i = 0; i < index - 1; ++i) {
+                move = move->address;
+            }
+            auto Mode = make_shared<Node<T>>(value);
+            Mode->address = move->address;
+            move->address = Mode;
+            size++;
+        }
+    }
+
 };
