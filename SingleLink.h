@@ -50,5 +50,20 @@ public:
 
     }
 
+    void removeLast(T &value) {
+        if (!body) {
+            throw runtime_error("Empty");
+        }
+        if (!body->address) {
+            body.reset();
+        } else {
+            auto Move = body;
+            while (Move->address->address){
+                Move = Move->address;
+            }
+            Move->address.reset();
+        }
+        size--;
+    }
 
 };
