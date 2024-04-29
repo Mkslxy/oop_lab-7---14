@@ -29,16 +29,26 @@ public:
 
     void addLast(T &value) {
         auto Mode = make_shared<Node<T>>(value);
-        if (!body){
+        if (!body) {
             body = Mode;
-        }else{
+        } else {
             auto Move = body;
-            while(Move -> address){
-                Move = Move -> address;
+            while (Move->address) {
+                Move = Move->address;
             }
-            Move -> address = Mode;
+            Move->address = Mode;
         }
         size++;
     }
+
+    void removeFirst(T &value) {
+        if (!body) {
+            throw runtime_error("Empty");
+        }
+        body = body->address;
+        size--;
+
+    }
+
 
 };
