@@ -20,14 +20,14 @@ protected:
 public:
     SingleLink() : body(nullptr), size(0) {}
 
-    void addFirst(T &value) {
+    void addFirst(const T &value) {
         auto move = make_shared<Node<T>>(value);
         move->address = body;
         body = move;
         size++;
     }
 
-    void addLast(T &value) {
+    void addLast(const T &value) {
         auto Mode = make_shared<Node<T>>(value);
         if (!body) {
             body = Mode;
@@ -41,7 +41,7 @@ public:
         size++;
     }
 
-    void removeFirst(T &value) {
+    void removeFirst() {
         if (!body) {
             throw runtime_error("Empty");
         }
@@ -50,7 +50,7 @@ public:
 
     }
 
-    void removeLast(T &value) {
+    void removeLast( T &value) {
         if (!body) {
             throw runtime_error("Empty");
         }
@@ -93,6 +93,23 @@ public:
             move->address = Mode;
             size++;
         }
+    }
+
+    void remove(int index ){
+        if (index < 0 || index > size){
+            throw std::out_of_range("Out of range");
+        }
+        if (index == 0){
+            removeFirst();
+        }else{
+            auto move = body;
+            for (int i = 0; i < index - 1; ++i) {
+                move = move->address;
+            }
+            move->address = move->address->address;
+            size--;
+        }
+
     }
 
 };
