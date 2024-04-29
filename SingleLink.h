@@ -20,12 +20,25 @@ protected:
 public:
     SingleLink() : body(nullptr), size(0) {}
 
-    void addFirst(T& value){
+    void addFirst(T &value) {
         auto Mode = make_shared<Node<T>>(value);
         Mode->address = body;
         body = Mode;
         size++;
     }
 
+    void addLast(T &value) {
+        auto Mode = make_shared<Node<T>>(value);
+        if (!body){
+            body = Mode;
+        }else{
+            auto Move = body;
+            while(Move -> address){
+                Move = Move -> address;
+            }
+            Move -> address = Mode;
+        }
+        size++;
+    }
 
 };
