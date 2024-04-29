@@ -119,5 +119,24 @@ public:
     bool isEmpty() const {
         return size == 0;
     }
+    bool contains(const T& value) const {
+        auto move = body;
+        while (move) {
+            if (move->data == value) {
+                return true;
+            }
+            move = move->next;
+        }
+        return false;
+    }
 
+    void print() const {
+        auto move = body;
+        while (move) {
+            std::cout << move->data << " ";
+            move = move->next;
+        }
+        std::cout << std::endl;
+    }
 };
+
