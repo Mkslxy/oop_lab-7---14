@@ -14,6 +14,12 @@ struct Node {
 
 template<typename T>
 class SingleLink {
-private:
+protected:
+    shared_ptr<Node<T>> body;
+    int size;
+public:
+    SingleLink() : body(nullptr), size(0) {}
+
+
 
 };
