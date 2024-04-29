@@ -32,5 +32,32 @@ public:
         this->size++;
     }
 
+    void RemoveFirst()  {
+        if (!this->body) {
+            throw runtime_error("Empty");
+        }
+        if (this->body->address) {
+            this->body->address->tail.reset();
+        }
+        this->body = this->body->address;
+        this->size--;
+    }
+
+    void RemoveLast()  {
+        if (!this->body) {
+            throw runtime_error("Empty");
+        }
+        if (!this->body->address) {
+            this->body.reset();
+        } else {
+            auto currentNode = this->body;
+            while (currentNode->address->address) {
+                currentNode = currentNode->address;
+            }
+            currentNode->address.reset();
+        }
+        this->size--;
+    }
+
 
 };
