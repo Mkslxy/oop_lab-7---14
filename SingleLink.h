@@ -7,7 +7,7 @@ template<typename T>
 struct Node {
     T data;
     shared_ptr<Node<T>> address;
-    weak_ptr<Node<T>> previous;
+    weak_ptr<Node<T>> tail;
 
     Node(T value) : data(value), address(nullptr) {}
 };
@@ -21,22 +21,22 @@ public:
     SingleLink() : body(nullptr), size(0) {}
 
     void addFirst(const T &value) {
-        auto move = make_shared<Node<T>>(value);
-        move->address = body;
-        body = move;
+        auto newNode = make_shared<Node<T>>(value);
+        newNode->address = body;
+        body = newNode;
         size++;
     }
 
     void addLast(const T &value) {
-        auto Mode = make_shared<Node<T>>(value);
+        auto newNode = make_shared<Node<T>>(value);
         if (!body) {
-            body = Mode;
+            body = newNode;
         } else {
-            auto move = body;
-            while (move->address) {
-                move = move->address;
+            auto currentNode = body;
+            while (currentNode->address) {
+                currentNode = currentNode->address;
             }
-            move->address = Mode;
+            currentNode->address = newNode;
         }
         size++;
     }
@@ -50,63 +50,63 @@ public:
 
     }
 
-    void removeLast( T &value) {
+    void removeLast() {
         if (!body) {
             throw runtime_error("Empty");
         }
         if (!body->address) {
             body.reset();
         } else {
-            auto move = body;
-            while (move->address->address){
-                move = move->address;
+            auto currentNode = body;
+            while (currentNode->address->address){
+                currentNode = currentNode->address;
             }
-            move->address.reset();
+            currentNode->address.reset();
         }
         size--;
     }
 
     T access(int index){
         if (index < 0 || index > size){
-            throw std::out_of_range("Out of range");
+            throw out_of_range("Out of range");
         }
-        auto move = body;
+        auto currentNode = body;
         for (int i = 0; i < index; ++i) {
-            move = move->address;
+            currentNode = currentNode->address;
         }
-        return move->data;
+        return currentNode->data;
     }
 
     void add(int index , T& value ){
         if (index < 0 || index > size){
-            throw std::out_of_range("Out of range");
+            throw out_of_range("Out of range");
         }
         if (index == 0){
             addFirst(value);
         }else{
-            auto move = body;
+            auto currentNode = body;
             for (int i = 0; i < index - 1; ++i) {
-                move = move->address;
+                currentNode = currentNode->address;
             }
-            auto Mode = make_shared<Node<T>>(value);
-            Mode->address = move->address;
-            move->address = Mode;
+            auto newNode = make_shared<Node<T>>(value);
+            newNode->address = currentNode->address;
+            currentNode->address = newNode;
             size++;
         }
     }
 
     void remove(int index ){
         if (index < 0 || index > size){
-            throw std::out_of_range("Out of range");
+            throw out_of_range("Out of range");
         }
         if (index == 0){
             removeFirst();
         }else{
-            auto move = body;
+            auto currentNode = body;
             for (int i = 0; i < index - 1; ++i) {
-                move = move->address;
+                currentNode = currentNode->address;
             }
-            move->address = move->address->address;
+            currentNode->address = currentNode->address->address;
             size--;
         }
 
@@ -120,21 +120,21 @@ public:
         return size == 0;
     }
     bool contains(const T& value) const {
-        auto move = body;
-        while (move) {
-            if (move->data == value) {
+        auto currentNode = body;
+        while (currentNode) {
+            if (currentNode->data == value) {
                 return true;
             }
-            move = move->next;
+            currentNode = currentNode->address;
         }
         return false;
     }
 
     void print() const {
-        auto move = body;
-        while (move) {
-            std::cout << move->data << " ";
-            move = move->next;
+        auto currentNode = body;
+        while (currentNode) {
+            std::cout << currentNode->data << " ";
+            currentNode = currentNode->address;
         }
         std::cout << std::endl;
     }

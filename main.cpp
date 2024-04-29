@@ -1,16 +1,32 @@
 #include <iostream>
 #include <memory>
-#include "SingleLink.h"
 #include "DoubleLink.h"
 
 using namespace std;
 
 
 int main() {
+    try {
+        SingleLink<int> test;
+        test.addFirst(1);
+        test.addLast(3);
+        test.addLast(2);
+        test.print();
+        test.removeFirst();
+        test.print();
+        //test.access();
+        test.getSize();
+        test.isEmpty();
+        test.contains(2);
 
-    SingleLink<int> test;
-    test.addFirst(1);
-    test.addLast(2);
-    test.removeFirst();
+        cout << endl;
+
+        DoubleLink<float> test2;
+        test2.AddFirst(2.345);
+        test2.AddLast(5.2345);
+        test2.RemoveFirst();
+        test2.print();
+
+    } catch (bool pass) {};
     return 0;
 }
