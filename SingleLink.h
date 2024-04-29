@@ -20,6 +20,12 @@ protected:
 public:
     SingleLink() : body(nullptr), size(0) {}
 
+    void addFirst(T& value){
+        auto Mode = make_shared<Node<T>>(value);
+        Mode->address = body;
+        body = Mode;
+        size++;
+    }
 
 
 };
