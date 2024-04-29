@@ -21,9 +21,9 @@ public:
     SingleLink() : body(nullptr), size(0) {}
 
     void addFirst(T &value) {
-        auto Mode = make_shared<Node<T>>(value);
-        Mode->address = body;
-        body = Mode;
+        auto move = make_shared<Node<T>>(value);
+        move->address = body;
+        body = move;
         size++;
     }
 
@@ -32,11 +32,11 @@ public:
         if (!body) {
             body = Mode;
         } else {
-            auto Move = body;
-            while (Move->address) {
-                Move = Move->address;
+            auto move = body;
+            while (move->address) {
+                move = move->address;
             }
-            Move->address = Mode;
+            move->address = Mode;
         }
         size++;
     }
@@ -57,13 +57,24 @@ public:
         if (!body->address) {
             body.reset();
         } else {
-            auto Move = body;
-            while (Move->address->address){
-                Move = Move->address;
+            auto move = body;
+            while (move->address->address){
+                move = move->address;
             }
-            Move->address.reset();
+            move->address.reset();
         }
         size--;
+    }
+
+    T access(int index){
+        if (index < 0 || index > size){
+            throw std::out_of_range("Out of range");
+        }
+        auto move = body;
+        for (int i = 0; i < index; ++i) {
+            move = move->address;
+        }
+        return move->data;
     }
 
 };
