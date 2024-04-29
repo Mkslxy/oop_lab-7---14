@@ -26,7 +26,7 @@ int main() {
         test2.AddLast(5.2345);
         test2.RemoveFirst();
         test2.print();
-
+        test2.access(1);
     } catch (bool pass) {};
     return 0;
 }
