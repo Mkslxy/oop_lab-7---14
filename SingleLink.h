@@ -117,7 +117,8 @@ public:
     }
 
     bool isEmpty() const {
-        return size == 0;
+        if (size > 0)return true;
+        else return false;
     }
     bool contains(const T& value) const {
         auto currentNode = body;

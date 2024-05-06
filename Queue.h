@@ -1,14 +1,34 @@
-//
-// Created by Леша on 06.05.2024.
-//
+#include <iostream>
+#include "DoubleLink.h"
 
-#ifndef LAB_7_QUEUE_H
-#define LAB_7_QUEUE_H
+using namespace std;
 
-
+template<typename T>
 class Queue {
+private:
+    DoubleLink<T> list;
+public:
+    void Enqueue(T data){
+        list.AddLast(data);
+    }
+
+    T Dequeue(){
+        T data = list.access(4);
+        list.removeFirst();
+        return data;
+    }
+
+    T peek(){
+        T data = list.access(4);
+        return data;
+    }
+
+    void isEmpty(){
+        return !list.isEmpty();
+    }
+
+    void isFull(){
+        return !list.isEmpty();
+    }
 
 };
-
-
-#endif //LAB_7_QUEUE_H

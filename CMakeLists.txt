@@ -6,4 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(lab_7 main.cpp
         SingleLink.h
         DoubleLink.cpp
-        DoubleLink.h)
+        DoubleLink.h
+        Queue.h
+        PriorityQueue.h
+        Stack.h)

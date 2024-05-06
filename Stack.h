@@ -1,14 +1,8 @@
-//
-// Created by Леша on 06.05.2024.
-//
+#include <iostream>
 
-#ifndef LAB_7_STACK_H
-#define LAB_7_STACK_H
+using namespace std;
 
-
-class Stack {
+class Stack{
+private:
 
 };
-
-
-#endif //LAB_7_STACK_H

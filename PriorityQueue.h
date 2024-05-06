@@ -1,13 +1,8 @@
-//
-// Created by Леша on 06.05.2024.
-//
+#include <iostream>
+#include <queue>
 
-#ifndef LAB_7_PRIORITYQUEUE_H
-#define LAB_7_PRIORITYQUEUE_H
+using namespace std;
 
 class PriorityQueue {
 
 };
-
-
-#endif //LAB_7_PRIORITYQUEUE_H
