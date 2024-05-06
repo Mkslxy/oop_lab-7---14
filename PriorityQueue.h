@@ -5,7 +5,6 @@
 #ifndef LAB_7_PRIORITYQUEUE_H
 #define LAB_7_PRIORITYQUEUE_H
 
-
 class PriorityQueue {
 
 };
